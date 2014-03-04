@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
+/// <summary>
+/// Descripción breve de Datos
+/// </summary>
+public class Datos
+{
+    public static DataTable Consultar(string consulta)
+    { 
+        MySqlCommand comando = Transporte.Conexion();
+        comando.CommandText = consulta;
+        return Transporte.EjecutarSelect(comando);
+    }
+}

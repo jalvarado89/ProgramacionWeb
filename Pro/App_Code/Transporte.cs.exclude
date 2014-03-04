@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
+
+/// <summary>
+/// Descripción breve de Transporte
+/// </summary>
+public class Transporte
+{	
+    public static MySqlCommand Conexion()
+    {
+        string cadena = "server = localhost; user id = root; password = 123; database = transportes";
+        MySqlConnection conexion = new MySqlConnection(cadena);
+        MySqlCommand _comando = conexion.CreateCommand();
+        _comando.CommandType = CommandType.Text;
+        return _comando;
+    }
+
+    public static DataTable EjecutarSelect(MySqlCommand comando)
+    {
+        DataTable _Tabla;
+        try
+        {
+            comando.Connection.Open();
+            MySqlDataReader _leer = comando.ExecuteReader();
+            _Tabla = new DataTable();
+            _Tabla.Load(_leer);
+            _leer.Close();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            comando.Connection.Close();
+        }
+
+        return _Tabla;
+    }
+}
+

@@ -1,0 +1,22 @@
+﻿@{
+    if (IsPost) {
+        decimal id = 0;
+        var name = Request["Name"];
+        var telefono = Request["Phone"];
+        var correo = Request["Email"];
+        var comentario = Request["Comment"];
+
+        var insertQuery = "INSERT INTO Reco(nombre, telefono, correo,comentario) VALUES('" + name + "', '" + telefono + "','" + correo + "','" + comentario + "')";
+
+        //try{
+            var db = Database.Open("Database1");
+            db.Execute(insertQuery);
+            id = db.GetLastInsertId();            
+       // }
+        //catch (Exception ex){
+                  
+        //}
+        Response.Redirect("/View/Recommend.cshtml/?id=" + id);   
+    }
+       
+}

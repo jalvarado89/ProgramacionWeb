@@ -1,0 +1,26 @@
+﻿@{
+    var eMailSent = false;
+    var errorMessage = "";
+    if (IsPost)
+    {
+        eMailSent = true;
+        var eMailSubject = "Asunto vacío";
+        var eMailMessage = Request["Message"];
+        var mail = Request["Email"];
+        
+        try {
+            
+        WebMail.SmtpServer = "smtp.hotmail.com";
+        WebMail.SmtpPort = 587;
+        WebMail.EnableSsl = true;
+        WebMail.UserName = "Jason A.";
+        WebMail.From = "tpizo@hotmail.com";
+        WebMail.Password = "legolas2416";
+        WebMail.Send(to: mail, subject: eMailSubject, body: eMailMessage, isBodyHtml: true);
+        }
+        catch (Exception ex) {
+            eMailSent = false;
+            errorMessage = ex.Message;
+            }        
+    } 
+}

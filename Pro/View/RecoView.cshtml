@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "/Shared/_Layout.cshtml";  
+}
+@{
+    var db = Database.Open("Database1"); 
+    var selectQueryString = "SELECT * FROM Reco ORDER BY nombre";
+
+    var message = "";
+    if (Request["product_id"] != "")
+    {
+        message = "Product was inserted successfully, product id is " + Request["product_id"];
+    } 
+}
+<html>    
+    <head>
+        <title>Web Site</title>
+        <style type="text/css">
+            .navigation li {float: left; margin: 0; padding: 0;}
+            .navigation li a {padding: 20px 30px; float: left;}
+            .navigation li.active a {background: #428BCA; color: #fff;}
+            .get-in-touch {position: relative;margin: 0 auto;padding: 30px;max-width: 370px;border-radius: 2px;}
+            .get-in-touch input[type=text],.get-in-touch input[type=email], .get-in-touch textarea {background: rgb(235, 241, 245);color: rgb(36, 39, 41);}
+            .get-in-touch  input:focus, .get-in-touch  textarea:focus {outline: 0;background: #FFF;}
+        </style>
+    </head>
+    <body>
+        
+        <div style="margin-right: auto; margin-bottom:0; margin-left:34%; margin-top:5%">
+            <ul class="navigation">
+                      <li>
+                      <a data-toggle="tab" href="/Default.cshtml">
+                         <span class="glyphicon glyphicon-user"></span>
+                      </a>
+                      </li>                    
+                      <li>
+                         <a data-toggle="tab" href="/View/Contact.cshtml">
+                      <span class="glyphicon glyphicon-envelope"></span>                                                                
+                         </a>
+                      </li>
+                      <li>
+                         <a data-toggle="tab" href="/View/Recommend.cshtml">                            
+                      <span class="glyphicon glyphicon-ok"></span>
+                         </a>  
+                      <li class="active">
+                         <a data-toggle="tab" href="/View/RecoView.cshtml">                            
+                      <span class="glyphicon glyphicon-book"></span>
+                         </a>                          
+                </li>                   
+             </ul>
+        </div>
+        <br /><br /><br />
+        <div style="margin-right: auto; margin-bottom:0; margin-left:37%; margin-top:5%">
+         <table> 
+            <tr>
+                <th>Id</th> 
+                <th>Nombre</th> 
+                <th>Telefono</th> 
+                <th>Email</th> 
+                <th>Comentario</th> 
+            </tr>
+            @foreach(var row in db.Query(selectQueryString))
+            {
+                <tr> 
+                <td>@row.Id</td> 
+                <td>@row.nombre</td> 
+                <td>@row.telefono</td> 
+                <td>@row.correo</td> 
+                <td style="text-align :right">@row.comentario</td>                 
+                </tr> 
+            }
+        </table> 
+        </div>
+        
+    </body>
+</html>
