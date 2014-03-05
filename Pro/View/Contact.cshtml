@@ -9,14 +9,15 @@
         var mail = Request["Email"];
         
         try {
-            
-        WebMail.SmtpServer = "smtp.hotmail.com";
+        
+        WebMail.SmtpServer = "smtp.gmail.com";
         WebMail.SmtpPort = 587;
         WebMail.EnableSsl = true;
-        WebMail.UserName = "Jason A.";
-        WebMail.From = "tpizo@hotmail.com";
+        WebMail.UserName = "jalvarado13389@gmail.com";
+        WebMail.From = "jalvarado13389@gmail.com";
         WebMail.Password = "legolas2416";
-        WebMail.Send(to: mail, subject: eMailSubject, body: eMailMessage, isBodyHtml: true);
+        WebMail.SmtpUseDefaultCredentials = false;
+        WebMail.Send(to: "jalvarado13389@gmail.com", subject: eMailSubject, body: eMailMessage, isBodyHtml: true);
         }
         catch (Exception ex) {
             eMailSent = false;

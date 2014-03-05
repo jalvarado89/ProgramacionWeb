@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 /// Descripción breve de Transporte
 /// </summary>
 public class Transporte
-{	
+{
     public static MySqlCommand Conexion()
     {
         string cadena = "server = localhost; user id = root; password = 123; database = transportes";
